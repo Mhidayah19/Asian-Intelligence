@@ -37,5 +37,5 @@ export const APP_CONFIG_DEFAULTS: AppConfig = {
 
   // for LiveKit Cloud Sandbox
   sandboxId: undefined,
-  agentName: 'asian-parent-tutor',
+  agentName: undefined, // Set to undefined to allow any agent to join
 };

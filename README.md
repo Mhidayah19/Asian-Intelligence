@@ -1,6 +1,24 @@
-# Agent Starter for React
+# Asian Intelligence - Voice AI Platform
 
-This is a starter template for [LiveKit Agents](https://docs.livekit.io/agents) that provides a simple voice interface using the [LiveKit JavaScript SDK](https://github.com/livekit/client-sdk-js). It supports [voice](https://docs.livekit.io/agents/start/voice-ai), [transcriptions](https://docs.livekit.io/agents/build/text/), and [virtual avatars](https://docs.livekit.io/agents/integrations/avatar).
+A real-time voice AI application powered by [LiveKit](https://livekit.io) and OpenAI's Realtime API. Built with Next.js 15 and Python.
+
+## 🚀 Quick Start
+
+**See [QUICKSTART.md](./QUICKSTART.md) for detailed setup instructions.**
+
+### Run the Application
+
+**Terminal 1 - Start the Agent:**
+```bash
+./start-agent.sh
+```
+
+**Terminal 2 - Start the Frontend:**
+```bash
+./start-frontend.sh
+```
+
+Then open http://localhost:3000 and start talking!
 
 Also available for:
 [Android](https://github.com/livekit-examples/agent-starter-android) • [Flutter](https://github.com/livekit-examples/agent-starter-flutter) • [Swift](https://github.com/livekit-examples/agent-starter-swift) • [React Native](https://github.com/livekit-examples/agent-starter-react-native)
@@ -23,52 +41,24 @@ Also available for:
 
 This template is built with Next.js and is free for you to use or modify as you see fit.
 
-### Project structure
+### Project Structure
 
 ```
-agent-starter-react/
-├── app/
-│   ├── (app)/
-│   ├── api/
-│   ├── components/
-│   ├── fonts/
-│   ├── globals.css
-│   └── layout.tsx
-├── components/
-│   ├── livekit/
-│   ├── ui/
-│   ├── app.tsx
-│   ├── session-view.tsx
-│   └── welcome.tsx
-├── hooks/
-├── lib/
-├── public/
-└── package.json
+Asian-Intelligence/
+├── agent/                    # Python Voice AI Backend
+│   ├── src/agent.py         # Main agent logic (OpenAI Realtime API)
+│   └── .env.local           # Agent configuration
+├── app/                     # Next.js App Router
+│   ├── (app)/              # App pages
+│   └── api/                # API routes
+├── components/             # React components
+│   ├── app/               # App-specific components
+│   └── livekit/           # LiveKit UI components
+├── hooks/                 # Custom React hooks
+├── start-agent.sh        # 🤖 Start backend
+├── start-frontend.sh     # 🌐 Start frontend
+└── .env.local           # Frontend configuration
 ```
-
-## Getting started
-
-> [!TIP]
-> If you'd like to try this application without modification, you can deploy an instance in just a few clicks with [LiveKit Cloud Sandbox](https://cloud.livekit.io/projects/p_/sandbox/templates/agent-starter-react).
-
-[![Open on LiveKit](https://img.shields.io/badge/Open%20on%20LiveKit%20Cloud-002CF2?style=for-the-badge&logo=external-link)](https://cloud.livekit.io/projects/p_/sandbox/templates/agent-starter-react)
-
-Run the following command to automatically clone this template.
-
-```bash
-lk app create --template agent-starter-react
-```
-
-Then run the app with:
-
-```bash
-pnpm install
-pnpm dev
-```
-
-And open http://localhost:3000 in your browser.
-
-You'll also need an agent to speak with. Try our starter agent for [Python](https://github.com/livekit-examples/agent-starter-python), [Node.js](https://github.com/livekit-examples/agent-starter-node), or [create your own from scratch](https://docs.livekit.io/agents/start/voice-ai/).
 
 ## Configuration
 
