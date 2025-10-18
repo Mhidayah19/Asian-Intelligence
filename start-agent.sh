@@ -5,6 +5,7 @@ set -e
 # Always run from repo root
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR/agent"
+echo "Starting UNIFIED agent (auto-switching voice/vision) with Python: $PYTHON_BIN"
 
 # 1) Ensure a local virtual environment exists at agent/.venv
 if [ ! -x ".venv/bin/python" ]; then
@@ -69,10 +70,9 @@ echo "CPU count for agent: $LIVEKIT_CPU_COUNT"
 
 # 5) Download required models (first time only)
 if [ ! -d ".livekit" ]; then
-  echo "Downloading AI models..."
-  "$PYTHON_BIN" src/agent.py download-files
+    echo "Downloading AI models..."
+    $PYTHON_BIN src/unified_agent.py download-files
 fi
 
-# 6) Run the agent
-echo "Starting agent..."
-"$PYTHON_BIN" src/agent.py dev
+# Run the UNIFIED agent (automatic voice-only / vision mode switching)
+$PYTHON_BIN src/unified_agent.py dev
