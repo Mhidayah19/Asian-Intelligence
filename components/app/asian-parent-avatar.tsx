@@ -11,10 +11,7 @@ interface AsianParentAvatarProps {
   showPopOutButton?: boolean;
 }
 
-const MOOD_CONFIG: Record<
-  Mood,
-  { emoji: string; label: string; bgColor: string; textColor: string }
-> = {
+const MOOD_CONFIG: Record<Mood, { emoji: string; label: string; bgColor: string; textColor: string }> = {
   happy: {
     emoji: '😊',
     label: 'Pleased (rare)',
@@ -41,11 +38,7 @@ const MOOD_CONFIG: Record<
   },
 };
 
-export function AsianParentAvatar({
-  mood = 'neutral',
-  className,
-  showPopOutButton = false,
-}: AsianParentAvatarProps) {
+export function AsianParentAvatar({ mood = 'neutral', className, showPopOutButton = false }: AsianParentAvatarProps) {
   const config = MOOD_CONFIG[mood];
   const [isPoppedOut, setIsPoppedOut] = useState(false);
 
@@ -64,9 +57,9 @@ export function AsianParentAvatar({
       });
 
       // Copy styles to PiP window
-      [...document.styleSheets].forEach((styleSheet) => {
+      [...document.styleSheets].forEach(styleSheet => {
         try {
-          const cssRules = [...styleSheet.cssRules].map((rule) => rule.cssText).join('');
+          const cssRules = [...styleSheet.cssRules].map(rule => rule.cssText).join('');
           const style = document.createElement('style');
           style.textContent = cssRules;
           pipWindow.document.head.appendChild(style);

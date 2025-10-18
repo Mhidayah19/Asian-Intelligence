@@ -13,10 +13,7 @@ interface AgentAvatarCardProps {
   className?: string;
 }
 
-const MOOD_CONFIG: Record<
-  Mood,
-  { emoji: string; label: string; bgColor: string; textColor: string }
-> = {
+const MOOD_CONFIG: Record<Mood, { emoji: string; label: string; bgColor: string; textColor: string }> = {
   happy: {
     emoji: '😊',
     label: 'Pleased (rare)',
@@ -87,9 +84,7 @@ export function AgentAvatarCard({ mood = 'neutral', className }: AgentAvatarCard
 
       {/* Audio Waveform Visualizer */}
       <div className="mt-4 rounded-md border border-amber-200 bg-amber-50 p-4 dark:border-amber-900/30 dark:bg-amber-950/20">
-        <div className="mb-2 text-center text-xs font-semibold text-gray-600 dark:text-gray-400">
-          Voice Activity
-        </div>
+        <div className="mb-2 text-center text-xs font-semibold text-gray-600 dark:text-gray-400">Voice Activity</div>
         <BarVisualizer
           barCount={7}
           state={agentState}

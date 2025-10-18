@@ -16,9 +16,7 @@ function transcriptionToChatMessage(textStream: TextStreamData, room: Room): Rec
     from:
       textStream.participantInfo.identity === room.localParticipant.identity
         ? room.localParticipant
-        : Array.from(room.remoteParticipants.values()).find(
-            (p) => p.identity === textStream.participantInfo.identity
-          ),
+        : Array.from(room.remoteParticipants.values()).find(p => p.identity === textStream.participantInfo.identity),
   };
 }
 
@@ -29,7 +27,7 @@ export function useChatMessages() {
 
   const mergedTranscriptions = useMemo(() => {
     const merged: Array<ReceivedChatMessage> = [
-      ...transcriptions.map((transcription) => transcriptionToChatMessage(transcription, room)),
+      ...transcriptions.map(transcription => transcriptionToChatMessage(transcription, room)),
       ...chat.chatMessages,
     ];
     return merged.sort((a, b) => a.timestamp - b.timestamp);

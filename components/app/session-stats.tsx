@@ -30,20 +30,14 @@ export function SessionStats({ className }: SessionStatsProps) {
         </div>
         <div className="flex items-center justify-between">
           <span className="text-gray-700 dark:text-gray-300">Correct:</span>
-          <span className="font-bold text-gray-700 dark:text-gray-300">
-            {MOCK_STATS.correct} 😐
-          </span>
+          <span className="font-bold text-gray-700 dark:text-gray-300">{MOCK_STATS.correct} 😐</span>
         </div>
         <div className="mt-2 border-t border-gray-200 pt-2 dark:border-gray-700">
           <div className="mb-1 text-xs text-gray-500 dark:text-gray-400">
             Cousin {MOCK_STATS.cousinName}&apos;s Score:
           </div>
-          <div className="font-bold text-amber-600 dark:text-amber-400">
-            {MOCK_STATS.cousinScore} ⭐
-          </div>
-          <div className="mt-1 text-xs text-gray-500 italic dark:text-gray-400">
-            (always better)
-          </div>
+          <div className="font-bold text-amber-600 dark:text-amber-400">{MOCK_STATS.cousinScore} ⭐</div>
+          <div className="mt-1 text-xs text-gray-500 italic dark:text-gray-400">(always better)</div>
         </div>
       </div>
     </div>

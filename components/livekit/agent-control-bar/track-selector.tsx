@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  BarVisualizer,
-  type TrackReferenceOrPlaceholder,
-  useTrackToggle,
-} from '@livekit/components-react';
+import { BarVisualizer, type TrackReferenceOrPlaceholder, useTrackToggle } from '@livekit/components-react';
 import { TrackDeviceSelect } from '@/components/livekit/agent-control-bar/track-device-select';
 import { TrackToggle } from '@/components/livekit/agent-control-bar/track-toggle';
 import { cn } from '@/lib/utils';

@@ -9,19 +9,13 @@ interface WelcomeViewProps {
   onStartCall: () => void;
 }
 
-export const WelcomeView = ({
-  startButtonText,
-  onStartCall,
-  ref,
-}: React.ComponentProps<'div'> & WelcomeViewProps) => {
+export const WelcomeView = ({ startButtonText, onStartCall, ref }: React.ComponentProps<'div'> & WelcomeViewProps) => {
   return (
     <div ref={ref}>
       <section className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-red-50 to-amber-50 text-center dark:from-red-950/20 dark:to-amber-950/20">
         <WelcomeImage />
 
-        <h1 className="mb-2 text-3xl font-bold text-red-800 md:text-4xl dark:text-red-400">
-          Asian Parent Math Tutor
-        </h1>
+        <h1 className="mb-2 text-3xl font-bold text-red-800 md:text-4xl dark:text-red-400">Asian Parent Math Tutor</h1>
 
         <p className="text-foreground max-w-prose px-4 pt-1 text-lg leading-6 font-medium">
           &quot;Why you no doctor yet? At least get A+ in math first!&quot;

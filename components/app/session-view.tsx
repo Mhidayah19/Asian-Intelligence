@@ -7,10 +7,7 @@ import { AgentAvatarCard } from '@/components/app/agent-avatar-card';
 import { ChatTranscript } from '@/components/app/chat-transcript';
 import { PreConnectMessage } from '@/components/app/preconnect-message';
 import { TileLayout } from '@/components/app/tile-layout';
-import {
-  AgentControlBar,
-  type ControlBarControls,
-} from '@/components/livekit/agent-control-bar/agent-control-bar';
+import { AgentControlBar, type ControlBarControls } from '@/components/livekit/agent-control-bar/agent-control-bar';
 import { useChatMessages } from '@/hooks/useChatMessages';
 import { useConnectionTimeout } from '@/hooks/useConnectionTimout';
 import { useDebugMode } from '@/hooks/useDebug';
@@ -63,10 +60,7 @@ interface SessionViewProps {
   appConfig: AppConfig;
 }
 
-export const SessionView = ({
-  appConfig,
-  ...props
-}: React.ComponentProps<'section'> & SessionViewProps) => {
+export const SessionView = ({ appConfig, ...props }: React.ComponentProps<'section'> & SessionViewProps) => {
   useConnectionTimeout(200_000);
   useDebugMode({ enabled: IN_DEVELOPMENT });
 
@@ -87,12 +81,7 @@ export const SessionView = ({
       {...props}
     >
       {/* Chat Transcript */}
-      <div
-        className={cn(
-          'fixed inset-0 grid grid-cols-1 grid-rows-1',
-          !chatOpen && 'pointer-events-none'
-        )}
-      >
+      <div className={cn('fixed inset-0 grid grid-cols-1 grid-rows-1', !chatOpen && 'pointer-events-none')}>
         <Fade top className="absolute inset-x-4 top-0 h-40" />
         <ScrollArea className="px-4 pt-40 pb-[150px] md:px-6 md:pb-[180px]">
           <ChatTranscript
@@ -114,13 +103,8 @@ export const SessionView = ({
       )}
 
       {/* Bottom */}
-      <MotionBottom
-        {...BOTTOM_VIEW_MOTION_PROPS}
-        className="fixed inset-x-3 bottom-0 z-50 md:inset-x-12"
-      >
-        {appConfig.isPreConnectBufferEnabled && (
-          <PreConnectMessage messages={messages} className="pb-4" />
-        )}
+      <MotionBottom {...BOTTOM_VIEW_MOTION_PROPS} className="fixed inset-x-3 bottom-0 z-50 md:inset-x-12">
+        {appConfig.isPreConnectBufferEnabled && <PreConnectMessage messages={messages} className="pb-4" />}
         <div className="bg-background/80 relative mx-auto max-w-2xl rounded-lg pb-3 backdrop-blur-sm md:pb-12">
           <Fade bottom className="absolute inset-x-0 top-0 h-4 -translate-y-full" />
           <AgentControlBar controls={controls} onChatOpenChange={setChatOpen} />

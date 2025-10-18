@@ -79,10 +79,8 @@ export function useRoom(appConfig: AppConfig) {
         }),
         tokenSource
           .fetch({ agentName: appConfig.agentName })
-          .then((connectionDetails) =>
-            room.connect(connectionDetails.serverUrl, connectionDetails.participantToken)
-          ),
-      ]).catch((error) => {
+          .then(connectionDetails => room.connect(connectionDetails.serverUrl, connectionDetails.participantToken)),
+      ]).catch(error => {
         if (aborted.current) {
           // Once the effect has cleaned up after itself, drop any errors
           //

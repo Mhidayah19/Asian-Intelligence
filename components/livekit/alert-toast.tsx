@@ -12,10 +12,9 @@ interface ToastProps {
 }
 
 export function toastAlert(toast: Omit<ToastProps, 'id'>) {
-  return sonnerToast.custom(
-    (id) => <AlertToast id={id} title={toast.title} description={toast.description} />,
-    { duration: 10_000 }
-  );
+  return sonnerToast.custom(id => <AlertToast id={id} title={toast.title} description={toast.description} />, {
+    duration: 10_000,
+  });
 }
 
 export function AlertToast(props: ToastProps) {

@@ -46,10 +46,7 @@ async function loadFileData(filePath: string): Promise<ArrayBuffer> {
   // Try file system first (works in local development)
   if (doesLocalFileExist(filePath)) {
     const buffer = await readFile(join(process.cwd(), filePath));
-    return buffer.buffer.slice(
-      buffer.byteOffset,
-      buffer.byteOffset + buffer.byteLength
-    ) as ArrayBuffer;
+    return buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength) as ArrayBuffer;
   }
 
   // Fallback to fetching from public URL (works in production)
@@ -132,10 +129,7 @@ export default async function Image() {
   const wordmarkSize = scaleImageSize(wordmarkDimensions, isLogoUriLocal ? 32 : 64);
 
   // logo
-  const { base64: logoSrcBase64, dimensions: logoDimensions } = await getImageData(
-    logoUri,
-    'public/lk-logo-dark.svg'
-  );
+  const { base64: logoSrcBase64, dimensions: logoDimensions } = await getImageData(logoUri, 'public/lk-logo-dark.svg');
   const logoSize = scaleImageSize(logoDimensions, 24);
 
   return new ImageResponse(

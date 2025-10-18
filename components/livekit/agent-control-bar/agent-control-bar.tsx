@@ -83,7 +83,7 @@ export function AgentControlBar({
     chat: controls?.chat ?? publishPermissions.data,
   };
 
-  const isAgentAvailable = participants.some((p) => p.isAgent);
+  const isAgentAvailable = participants.some(p => p.isAgent);
 
   return (
     <div
@@ -96,11 +96,7 @@ export function AgentControlBar({
     >
       {/* Chat Input */}
       {visibleControls.chat && (
-        <ChatInput
-          chatOpen={chatOpen}
-          isAgentAvailable={isAgentAvailable}
-          onSend={handleSendMessage}
-        />
+        <ChatInput chatOpen={chatOpen} isAgentAvailable={isAgentAvailable} onSend={handleSendMessage} />
       )}
 
       <div className="flex gap-1">
@@ -162,12 +158,7 @@ export function AgentControlBar({
 
         {/* Disconnect */}
         {visibleControls.leave && (
-          <Button
-            variant="destructive"
-            onClick={handleDisconnect}
-            disabled={!isSessionActive}
-            className="font-mono"
-          >
+          <Button variant="destructive" onClick={handleDisconnect} disabled={!isSessionActive} className="font-mono">
             <PhoneDisconnectIcon weight="bold" />
             <span className="hidden md:inline">END SESSION</span>
             <span className="inline md:hidden">END</span>

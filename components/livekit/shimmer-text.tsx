@@ -6,16 +6,9 @@ interface ShimmerTextProps {
   className?: string;
 }
 
-export function ShimmerText({
-  children,
-  className,
-  ref,
-}: ShimmerTextProps & React.RefAttributes<HTMLSpanElement>) {
+export function ShimmerText({ children, className, ref }: ShimmerTextProps & React.RefAttributes<HTMLSpanElement>) {
   return (
-    <span
-      ref={ref}
-      className={cn('animate-text-shimmer inline-block !bg-clip-text text-transparent', className)}
-    >
+    <span ref={ref} className={cn('animate-text-shimmer inline-block !bg-clip-text text-transparent', className)}>
       {children}
     </span>
   );

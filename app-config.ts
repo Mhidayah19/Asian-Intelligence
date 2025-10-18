@@ -22,7 +22,8 @@ export interface AppConfig {
 export const APP_CONFIG_DEFAULTS: AppConfig = {
   companyName: 'Asian Intelligence',
   pageTitle: 'Asian Parent Math Tutor AI',
-  pageDescription: 'An AI tutor that helps with math in the style of an Asian tiger parent - "Why you get B+? You want to be failure in life ah?"',
+  pageDescription:
+    'An AI tutor that helps with math in the style of an Asian tiger parent - "Why you get B+? You want to be failure in life ah?"',
 
   supportsChatInput: true,
   supportsVideoInput: true,

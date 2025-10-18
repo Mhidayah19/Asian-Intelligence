@@ -21,11 +21,7 @@ export default async function Layout({ children }: LayoutProps) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={logo} alt={`${companyName} Logo`} className="block size-6 dark:hidden" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={logoDark ?? logo}
-            alt={`${companyName} Logo`}
-            className="hidden size-6 dark:block"
-          />
+          <img src={logoDark ?? logo} alt={`${companyName} Logo`} className="hidden size-6 dark:block" />
         </a>
       </header>
 

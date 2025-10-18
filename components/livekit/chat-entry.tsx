@@ -48,12 +48,7 @@ export const ChatEntry = ({
           {time.toLocaleTimeString(locale, { timeStyle: 'short' })}
         </span>
       </header>
-      <span
-        className={cn(
-          'max-w-4/5 rounded-[20px]',
-          messageOrigin === 'local' ? 'bg-muted ml-auto p-2' : 'mr-auto'
-        )}
-      >
+      <span className={cn('max-w-4/5 rounded-[20px]', messageOrigin === 'local' ? 'bg-muted ml-auto p-2' : 'mr-auto')}>
         {message}
       </span>
     </li>

@@ -80,15 +80,10 @@ export function ChatTranscript({
                   {...MESSAGE_MOTION_PROPS}
                 />
                 {/* Add emoji reactions for Asian parent messages */}
-                {isAsianParent && message.toLowerCase().includes('aiya') && (
-                  <span className="ml-2 text-xl">😤</span>
-                )}
-                {isAsianParent && message.toLowerCase().includes('walao') && (
-                  <span className="ml-2 text-xl">😠</span>
-                )}
+                {isAsianParent && message.toLowerCase().includes('aiya') && <span className="ml-2 text-xl">😤</span>}
+                {isAsianParent && message.toLowerCase().includes('walao') && <span className="ml-2 text-xl">😠</span>}
                 {isAsianParent &&
-                  (message.toLowerCase().includes('good') ||
-                    message.toLowerCase().includes('not bad')) && (
+                  (message.toLowerCase().includes('good') || message.toLowerCase().includes('not bad')) && (
                     <span className="ml-2 text-xl">😐</span>
                   )}
               </div>

@@ -9,13 +9,7 @@ import { Alert, AlertDescription, AlertTitle, alertVariants } from '@/components
 import { AlertToast } from '@/components/livekit/alert-toast';
 import { Button, buttonVariants } from '@/components/livekit/button';
 import { ChatEntry } from '@/components/livekit/chat-entry';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/livekit/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/livekit/select';
 import { ShimmerText } from '@/components/livekit/shimmer-text';
 import { Toggle, toggleVariants } from '@/components/livekit/toggle';
 import { cn } from '@/lib/utils';
@@ -38,9 +32,7 @@ function Container({ componentName, children, className }: ContainerProps) {
       <h3 className="text-foreground text-2xl font-bold">
         <span className="tracking-tight">{componentName}</span>
       </h3>
-      <div className="bg-background border-input space-y-4 rounded-3xl border p-8 drop-shadow-lg/5">
-        {children}
-      </div>
+      <div className="bg-background border-input space-y-4 rounded-3xl border p-8 drop-shadow-lg/5">{children}</div>
     </div>
   );
 }
@@ -67,23 +59,18 @@ export default function Base() {
             </tr>
           </thead>
           <tbody className="[&_td]:p-2 [&_td:not(:first-child)]:text-center">
-            {['default', 'primary', 'secondary', 'outline', 'ghost', 'link', 'destructive'].map(
-              (variant) => (
-                <tr key={variant}>
-                  <td className="text-right font-mono text-xs font-normal uppercase">{variant}</td>
-                  {['sm', 'default', 'lg', 'icon'].map((size) => (
-                    <td key={size}>
-                      <Button
-                        variant={variant as buttonVariantsType}
-                        size={size as buttonVariantsSizeType}
-                      >
-                        {size === 'icon' ? <MicrophoneIcon size={16} weight="bold" /> : 'Button'}
-                      </Button>
-                    </td>
-                  ))}
-                </tr>
-              )
-            )}
+            {['default', 'primary', 'secondary', 'outline', 'ghost', 'link', 'destructive'].map(variant => (
+              <tr key={variant}>
+                <td className="text-right font-mono text-xs font-normal uppercase">{variant}</td>
+                {['sm', 'default', 'lg', 'icon'].map(size => (
+                  <td key={size}>
+                    <Button variant={variant as buttonVariantsType} size={size as buttonVariantsSizeType}>
+                      {size === 'icon' ? <MicrophoneIcon size={16} weight="bold" /> : 'Button'}
+                    </Button>
+                  </td>
+                ))}
+              </tr>
+            ))}
           </tbody>
         </table>
       </Container>
@@ -101,15 +88,12 @@ export default function Base() {
             </tr>
           </thead>
           <tbody className="[&_td]:p-2 [&_td:not(:first-child)]:text-center">
-            {['default', 'primary', 'secondary', 'outline'].map((variant) => (
+            {['default', 'primary', 'secondary', 'outline'].map(variant => (
               <tr key={variant}>
                 <td className="text-right font-mono text-xs font-normal uppercase">{variant}</td>
-                {['sm', 'default', 'lg', 'icon'].map((size) => (
+                {['sm', 'default', 'lg', 'icon'].map(size => (
                   <td key={size}>
-                    <Toggle
-                      size={size as toggleVariantsSizeType}
-                      variant={variant as toggleVariantsType}
-                    >
+                    <Toggle size={size as toggleVariantsSizeType} variant={variant as toggleVariantsType}>
                       {size === 'icon' ? <MicrophoneIcon size={16} weight="bold" /> : 'Toggle'}
                     </Toggle>
                   </td>
@@ -122,7 +106,7 @@ export default function Base() {
 
       {/* Alert */}
       <Container componentName="Alert">
-        {['default', 'destructive'].map((variant) => (
+        {['default', 'destructive'].map(variant => (
           <div key={variant}>
             <StoryTitle>{variant}</StoryTitle>
             <Alert key={variant} variant={variant as alertVariantsType}>
@@ -256,11 +240,7 @@ export default function Base() {
       <Container componentName="AlertToast">
         <StoryTitle>Alert toast</StoryTitle>
         <div className="mx-auto max-w-prose">
-          <AlertToast
-            id="alert-toast"
-            title="Alert toast"
-            description="This is a alert toast description."
-          />
+          <AlertToast id="alert-toast" title="Alert toast" description="This is a alert toast description." />
         </div>
       </Container>
     </>
