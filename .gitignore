@@ -41,3 +41,31 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE/editor
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+.idea/
+.fleet/
+.cursor/
+
+# OS
+Thumbs.db
+
+# Lint cache
+.eslintcache
+
+# Local env tools
+.envrc
+
+# Build/output scratch
+dist/
+tmp/
+temp/
+
+# pnpm state/home
+.pnpm-state/
+.pnpm-home/
