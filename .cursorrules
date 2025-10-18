@@ -1,0 +1,100 @@
+// Cursor Rules for Asian-Intelligence
+// Purpose: Provide actionable, stack-aware guidance for Cursor to assist consistently.
+// Scope: Next.js 15 + React 19 + TypeScript 5 + ESLint 9 (flat), Prettier 3, Tailwind 4
+//        Python agent (LiveKit Agents) with Ruff and pytest.
+
+// ----------------------------
+// GLOBAL EDITING PRINCIPLES
+// ----------------------------
+- Prefer clarity over brevity in code and naming.
+- Use early returns to reduce nesting; avoid unnecessary try/catch.
+- Do not introduce comments that restate obvious logic. Reserve comments for rationale, invariants, edge cases, or perf/security notes.
+- Maintain existing indentation style and width.
+- Avoid wide, single-line expressions; wrap long lines for readability.
+
+// ----------------------------
+// TYPESCRIPT / NEXT.JS RULES
+// ----------------------------
+- Use TypeScript strict mode as configured; avoid any unless unavoidable and locally justified.
+- Exported functions, React components, and utilities should have explicit types on parameters and return values when not trivially inferred.
+- Use functional React components with named functions; avoid default exports for components when possible.
+- Prefer server components by default in the `app/` router; add 'use client' only when necessary (hooks, event handlers, refs, state).
+- For client components, co-locate styles and keep component state minimal. Hoist state up when shared.
+- Do not use `next/image` unless it adds value; follow Next 15 guidance. Keep `next.config.ts` minimal and typed.
+- Use `@/*` path alias as configured in `tsconfig.json`.
+- Prefer `fetch` with proper typing. Centralize shared API utilities under `lib/` when patterns repeat.
+- Keep JSX free of inline anonymous functions when they cause re-renders on large lists; memoize when needed.
+- Respect React 19 concurrent features; avoid legacy patterns (UNSAFE_ methods, deprecated lifecycles).
+- Tailwind 4: prefer utility classes; avoid custom CSS unless necessary. Use `tw-merge` for dynamic class combinations.
+- Keep accessibility in mind: label interactive controls, manage focus, provide alt text and aria attributes.
+
+// Routing & Files
+- Under `app/`, keep route groups organized. Avoid deep nesting when not needed.
+- Use route handlers in `app/api/*` with Request/Response Web APIs. Validate inputs and sanitize outputs.
+
+// State & Effects
+- Keep effects (`useEffect`) free of business logic when possible. Extract logic to pure functions in `lib/`.
+- Use custom hooks under `hooks/` for shared stateful logic. Name hooks `useX` with clear intent.
+
+// Error Handling
+- Handle async errors at call sites. Prefer typed results or discriminated unions over throwing where feasible.
+- Surface user-facing errors via UI components in `components/livekit/alert.tsx` and `toaster` utilities.
+
+// Imports
+- Enforce sorted imports using `@trivago/prettier-plugin-sort-imports`. Group by builtins, external, internal (`@/*`).
+- Prefer named exports; avoid default exports for shared utilities/components.
+
+// Testing (web)
+- Co-locate tests next to files or under `__tests__` if needed. Use React Testing Library patterns.
+
+// ----------------------------
+// PYTHON AGENT RULES
+// ----------------------------
+- Target Python >=3.9. Follow Ruff config in `agent/pyproject.toml`.
+- Keep functions small and single-purpose with descriptive names.
+- Avoid catching broad exceptions; catch specific exceptions and handle meaningfully.
+- Use type hints throughout public functions. Prefer `typing` and `collections.abc` types.
+- Structure modules under `agent/src/`. Keep I/O at edges; core logic pure where possible.
+- Keep async boundaries explicit (`async def`). Avoid blocking calls in async contexts.
+- Configuration via environment variables or `.env.local`; do not hardcode secrets.
+- Write pytest tests for critical logic; use `pytest-asyncio` for async flows.
+
+// Logging & Observability (Python)
+- Use `logging` module with module-level loggers. No print statements in library code.
+- Log at INFO for high-level events, DEBUG for diagnostics, WARNING/ERROR for issues.
+
+// ----------------------------
+// LINT, FORMAT, AND CI BEHAVIOR
+// ----------------------------
+- JavaScript/TypeScript: run `pnpm lint` and `pnpm format:check` before commits. Treat lint warnings as actionable in PRs.
+- Respect ESLint flat config in `eslint.config.mjs`; do not downgrade severity without justification.
+- Prettier 3 is the source of truth for formatting; do not hand-wrap solely to avoid Prettier diffs.
+- Tailwind class order is managed by `prettier-plugin-tailwindcss`.
+- Python: enforce Ruff linting and formatting configs from `agent/pyproject.toml`. Avoid disabling rules globally.
+
+// ----------------------------
+// PERFORMANCE & ACCESSIBILITY
+// ----------------------------
+- Keep bundle size lean: prefer dynamic imports for heavy/rarely used UI.
+- Memoize expensive calculations and large lists (`React.memo`, `useMemo`, `useCallback`) only when measurements indicate benefit.
+- Prefer semantic HTML, keyboard navigation support, and proper aria labels.
+
+// ----------------------------
+// SECURITY & SECRETS
+// ----------------------------
+- Do not commit secrets. Use `.env.local` and environment variables.
+- Validate and sanitize inputs on API routes. Never trust client input.
+- Avoid exposing server-only env vars to the client. Use Next.js public prefix only when necessary.
+- For Python, avoid shelling out; if necessary, sanitize inputs and use `subprocess` safely.
+
+// ----------------------------
+// CODE REVIEW CHECKLIST (Cursor can nudge on PR diffs)
+// ----------------------------
+- Are names descriptive and consistent?
+- Are types explicit where needed? Any `any` or broad `unknown` left?
+- Are effects minimal and dependencies correct?
+- Are imports sorted and unused ones removed?
+- Are user-visible errors and loading states handled?
+- Any duplicated patterns that should be factored into `lib/` or hooks?
+- Any secrets or server-only code leaking to client?
+- For Python: are async flows correct and non-blocking? Are exceptions specific?
