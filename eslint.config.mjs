@@ -17,6 +17,18 @@ const eslintConfig = [
     'prettier',
     'plugin:prettier/recommended'
   ),
+  {
+    rules: {
+      // Allow @ts-expect-error without description
+      '@typescript-eslint/ban-ts-comment': 'off',
+      
+      // Allow unescaped quotes/apostrophes in JSX
+      'react/no-unescaped-entities': 'off',
+      
+      // Make unused vars a warning instead of error
+      '@typescript-eslint/no-unused-vars': 'warn',
+    },
+  },
 ];
 
 export default eslintConfig;

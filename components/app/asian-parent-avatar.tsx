@@ -11,7 +11,10 @@ interface AsianParentAvatarProps {
   showPopOutButton?: boolean;
 }
 
-const MOOD_CONFIG: Record<Mood, { emoji: string; label: string; bgColor: string; textColor: string }> = {
+const MOOD_CONFIG: Record<
+  Mood,
+  { emoji: string; label: string; bgColor: string; textColor: string }
+> = {
   happy: {
     emoji: '😊',
     label: 'Pleased (rare)',
@@ -38,19 +41,23 @@ const MOOD_CONFIG: Record<Mood, { emoji: string; label: string; bgColor: string;
   },
 };
 
-export function AsianParentAvatar({ mood = 'neutral', className, showPopOutButton = false }: AsianParentAvatarProps) {
+export function AsianParentAvatar({
+  mood = 'neutral',
+  className,
+  showPopOutButton = false,
+}: AsianParentAvatarProps) {
   const config = MOOD_CONFIG[mood];
   const [isPoppedOut, setIsPoppedOut] = useState(false);
 
   const handlePopOut = async () => {
-    // @ts-ignore - Document PiP API is experimental
+    // @ts-expect-error - Document PiP API is experimental
     if (!window.documentPictureInPicture) {
       alert('Picture-in-Picture not supported. Use Chrome 116+');
       return;
     }
 
     try {
-      // @ts-ignore
+      // @ts-expect-error - Document PiP API is experimental
       const pipWindow = await window.documentPictureInPicture.requestWindow({
         width: 360,
         height: 400,
@@ -63,7 +70,7 @@ export function AsianParentAvatar({ mood = 'neutral', className, showPopOutButto
           const style = document.createElement('style');
           style.textContent = cssRules;
           pipWindow.document.head.appendChild(style);
-        } catch (e) {
+        } catch {
           const link = document.createElement('link');
           link.rel = 'stylesheet';
           link.href = styleSheet.href!;
@@ -88,7 +95,7 @@ export function AsianParentAvatar({ mood = 'neutral', className, showPopOutButto
             </div>
             <div style="margin-top: 16px; padding: 12px; background: #fffbeb; border-radius: 6px; border: 1px solid #fcd34d;">
               <p style="font-size: 0.75rem; color: #374151; font-style: italic; line-height: 1.625;">
-                ${mood === 'happy' ? "Not bad lah... but don't get cocky!" : mood === 'neutral' ? "I'm watching you. Better focus!" : mood === 'disappointed' ? "Aiya! Your cousin would never make this mistake!" : "WALAO! You want to become garbage collector ah?!"}
+                ${mood === 'happy' ? "Not bad lah... but don't get cocky!" : mood === 'neutral' ? "I'm watching you. Better focus!" : mood === 'disappointed' ? 'Aiya! Your cousin would never make this mistake!' : 'WALAO! You want to become garbage collector ah?!'}
               </p>
             </div>
           </div>
@@ -99,7 +106,6 @@ export function AsianParentAvatar({ mood = 'neutral', className, showPopOutButto
       setIsPoppedOut(true);
 
       // Reset when closed
-      // @ts-ignore
       pipWindow.addEventListener('pagehide', () => {
         setIsPoppedOut(false);
       });
@@ -110,42 +116,47 @@ export function AsianParentAvatar({ mood = 'neutral', className, showPopOutButto
   };
 
   return (
-    <div className={cn('bg-white dark:bg-card rounded-lg p-4 shadow-md border border-red-200 dark:border-red-900/30', className)}>
+    <div
+      className={cn(
+        'dark:bg-card rounded-lg border border-red-200 bg-white p-4 shadow-md dark:border-red-900/30',
+        className
+      )}
+    >
       {showPopOutButton && !isPoppedOut && (
         <button
           onClick={handlePopOut}
-          className="mb-3 w-full px-3 py-2 text-xs font-medium text-white bg-red-600 hover:bg-red-700 rounded-md transition-colors"
+          className="mb-3 w-full rounded-md bg-red-600 px-3 py-2 text-xs font-medium text-white transition-colors hover:bg-red-700"
         >
           👁️ Pop Out (Always On Top)
         </button>
       )}
       {isPoppedOut && (
-        <div className="mb-3 px-3 py-2 text-xs text-center text-green-700 bg-green-100 rounded-md">
+        <div className="mb-3 rounded-md bg-green-100 px-3 py-2 text-center text-xs text-green-700">
           ✓ Watching in PiP window
         </div>
       )}
       <div className="text-center">
-        <div className={cn('inline-flex items-center justify-center w-24 h-24 rounded-full mb-3 transition-all duration-300', config.bgColor)}>
+        <div
+          className={cn(
+            'mb-3 inline-flex h-24 w-24 items-center justify-center rounded-full transition-all duration-300',
+            config.bgColor
+          )}
+        >
           <span className="text-6xl">{config.emoji}</span>
         </div>
-        <div className={cn('text-sm font-semibold mb-1', config.textColor)}>
-          {config.label}
-        </div>
-        <div className="text-xs text-gray-500 dark:text-gray-400 italic">
-          Asian Parent Mode
-        </div>
+        <div className={cn('mb-1 text-sm font-semibold', config.textColor)}>{config.label}</div>
+        <div className="text-xs text-gray-500 italic dark:text-gray-400">Asian Parent Mode</div>
       </div>
-      
+
       {/* Mood-specific quotes */}
-      <div className="mt-4 p-3 bg-amber-50 dark:bg-amber-950/20 rounded-md border border-amber-200 dark:border-amber-900/30">
-        <p className="text-xs text-gray-700 dark:text-gray-300 italic leading-relaxed">
+      <div className="mt-4 rounded-md border border-amber-200 bg-amber-50 p-3 dark:border-amber-900/30 dark:bg-amber-950/20">
+        <p className="text-xs leading-relaxed text-gray-700 italic dark:text-gray-300">
           {mood === 'happy' && "Not bad lah... but don't get cocky!"}
           {mood === 'neutral' && "I'm watching you. Better focus!"}
-          {mood === 'disappointed' && "Aiya! Your cousin would never make this mistake!"}
-          {mood === 'angry' && "WALAO! You want to become garbage collector ah?!"}
+          {mood === 'disappointed' && 'Aiya! Your cousin would never make this mistake!'}
+          {mood === 'angry' && 'WALAO! You want to become garbage collector ah?!'}
         </p>
       </div>
     </div>
   );
 }
-

@@ -86,9 +86,11 @@ export function ChatTranscript({
                 {isAsianParent && message.toLowerCase().includes('walao') && (
                   <span className="ml-2 text-xl">😠</span>
                 )}
-                {isAsianParent && (message.toLowerCase().includes('good') || message.toLowerCase().includes('not bad')) && (
-                  <span className="ml-2 text-xl">😐</span>
-                )}
+                {isAsianParent &&
+                  (message.toLowerCase().includes('good') ||
+                    message.toLowerCase().includes('not bad')) && (
+                    <span className="ml-2 text-xl">😐</span>
+                  )}
               </div>
             );
           })}

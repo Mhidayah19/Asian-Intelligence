@@ -82,7 +82,10 @@ export const SessionView = ({
   };
 
   return (
-    <section className="bg-gradient-to-br from-red-50 to-amber-50 dark:from-red-950/20 dark:to-amber-950/20 relative z-10 h-full w-full overflow-hidden" {...props}>
+    <section
+      className="relative z-10 h-full w-full overflow-hidden bg-gradient-to-br from-red-50 to-amber-50 dark:from-red-950/20 dark:to-amber-950/20"
+      {...props}
+    >
       {/* Chat Transcript */}
       <div
         className={cn(
@@ -105,7 +108,7 @@ export const SessionView = ({
 
       {/* Side Panel - Avatar & Audio (visible when chat is closed) */}
       {!chatOpen && (
-        <div className="fixed right-8 top-8 bottom-40 z-40 w-[340px] hidden lg:flex flex-col">
+        <div className="fixed top-8 right-8 bottom-40 z-40 hidden w-[340px] flex-col lg:flex">
           <AgentAvatarCard mood="neutral" className="flex-shrink-0" />
         </div>
       )}
@@ -118,7 +121,7 @@ export const SessionView = ({
         {appConfig.isPreConnectBufferEnabled && (
           <PreConnectMessage messages={messages} className="pb-4" />
         )}
-        <div className="bg-background/80 backdrop-blur-sm relative mx-auto max-w-2xl pb-3 md:pb-12 rounded-lg">
+        <div className="bg-background/80 relative mx-auto max-w-2xl rounded-lg pb-3 backdrop-blur-sm md:pb-12">
           <Fade bottom className="absolute inset-x-0 top-0 h-4 -translate-y-full" />
           <AgentControlBar controls={controls} onChatOpenChange={setChatOpen} />
         </div>
