@@ -8,9 +8,7 @@ export function useAutoScroll(scrollContentContainer?: Element | null) {
       if (!scrollContentContainer) return;
 
       const distanceFromBottom =
-        scrollContentContainer.scrollHeight -
-        scrollContentContainer.clientHeight -
-        scrollContentContainer.scrollTop;
+        scrollContentContainer.scrollHeight - scrollContentContainer.clientHeight - scrollContentContainer.scrollTop;
 
       if (distanceFromBottom < AUTO_SCROLL_THRESHOLD_PX) {
         scrollContentContainer.scrollTop = scrollContentContainer.scrollHeight;

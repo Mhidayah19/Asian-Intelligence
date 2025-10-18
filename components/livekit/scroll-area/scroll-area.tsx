@@ -8,10 +8,7 @@ interface ScrollAreaProps {
   children?: React.ReactNode;
 }
 
-export function ScrollArea({
-  className,
-  children,
-}: ScrollAreaProps & React.HTMLAttributes<HTMLDivElement>) {
+export function ScrollArea({ className, children }: ScrollAreaProps & React.HTMLAttributes<HTMLDivElement>) {
   const scrollContentRef = useRef<HTMLDivElement>(null);
 
   useAutoScroll(scrollContentRef.current);

@@ -51,11 +51,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn(
-        publicSans.variable,
-        commitMono.variable,
-        'scroll-smooth font-sans antialiased'
-      )}
+      className={cn(publicSans.variable, commitMono.variable, 'scroll-smooth font-sans antialiased')}
     >
       <head>
         {styles && <style>{styles}</style>}

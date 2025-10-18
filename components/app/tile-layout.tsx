@@ -23,11 +23,7 @@ const ANIMATION_TRANSITION = {
 const classNames = {
   // GRID
   // 2 Columns x 3 Rows
-  grid: [
-    'h-full w-full',
-    'grid gap-x-2 place-content-center',
-    'grid-cols-[1fr_1fr] grid-rows-[90px_1fr_90px]',
-  ],
+  grid: ['h-full w-full', 'grid gap-x-2 place-content-center', 'grid-cols-[1fr_1fr] grid-rows-[90px_1fr_90px]'],
   // Agent
   // chatOpen: true,
   // hasSecondTile: true
@@ -74,11 +70,7 @@ interface TileLayoutProps {
 }
 
 export function TileLayout({ chatOpen }: TileLayoutProps) {
-  const {
-    state: agentState,
-    audioTrack: agentAudioTrack,
-    videoTrack: agentVideoTrack,
-  } = useVoiceAssistant();
+  const { state: agentState, audioTrack: agentAudioTrack, videoTrack: agentVideoTrack } = useVoiceAssistant();
   const [screenShareTrack] = useTracks([Track.Source.ScreenShare]);
   const cameraTrack: TrackReference | undefined = useLocalTrackRef(Track.Source.Camera);
 
@@ -153,13 +145,11 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                   initial={{
                     scale: 1,
                     opacity: 1,
-                    maskImage:
-                      'radial-gradient(circle, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 20px, transparent 20px)',
+                    maskImage: 'radial-gradient(circle, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 20px, transparent 20px)',
                     filter: 'blur(20px)',
                   }}
                   animate={{
-                    maskImage:
-                      'radial-gradient(circle, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 500px, transparent 500px)',
+                    maskImage: 'radial-gradient(circle, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 500px, transparent 500px)',
                     filter: 'blur(0px)',
                     borderRadius: chatOpen ? 6 : 12,
                   }}
@@ -173,10 +163,7 @@ export function TileLayout({ chatOpen }: TileLayoutProps) {
                       duration: 1,
                     },
                   }}
-                  className={cn(
-                    'overflow-hidden bg-black drop-shadow-xl/80',
-                    chatOpen ? 'h-[90px]' : 'h-auto w-full'
-                  )}
+                  className={cn('overflow-hidden bg-black drop-shadow-xl/80', chatOpen ? 'h-[90px]' : 'h-auto w-full')}
                 >
                   <VideoTrack
                     width={videoWidth}

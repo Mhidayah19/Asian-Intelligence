@@ -63,11 +63,7 @@ export async function POST(req: Request) {
   }
 }
 
-function createParticipantToken(
-  userInfo: AccessTokenOptions,
-  roomName: string,
-  agentName?: string
-): Promise<string> {
+function createParticipantToken(userInfo: AccessTokenOptions, roomName: string, agentName?: string): Promise<string> {
   const at = new AccessToken(API_KEY, API_SECRET, {
     ...userInfo,
     ttl: '15m',

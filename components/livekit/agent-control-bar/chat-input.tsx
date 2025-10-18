@@ -29,11 +29,7 @@ interface ChatInputProps {
   onSend?: (message: string) => void;
 }
 
-export function ChatInput({
-  chatOpen,
-  isAgentAvailable = false,
-  onSend = async () => {},
-}: ChatInputProps) {
+export function ChatInput({ chatOpen, isAgentAvailable = false, onSend = async () => {} }: ChatInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isSending, setIsSending] = useState(false);
   const [message, setMessage] = useState<string>('');
@@ -67,10 +63,7 @@ export function ChatInput({
       animate={chatOpen ? 'visible' : 'hidden'}
       className="border-input/50 flex w-full items-start overflow-hidden border-b"
     >
-      <form
-        onSubmit={handleSubmit}
-        className="mb-3 flex grow items-end gap-2 rounded-md pl-1 text-sm"
-      >
+      <form onSubmit={handleSubmit} className="mb-3 flex grow items-end gap-2 rounded-md pl-1 text-sm">
         <input
           autoFocus
           ref={inputRef}
@@ -78,7 +71,7 @@ export function ChatInput({
           value={message}
           disabled={!chatOpen}
           placeholder="Type something..."
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={e => setMessage(e.target.value)}
           className="h-8 flex-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
         />
         <Button
@@ -89,11 +82,7 @@ export function ChatInput({
           title={isSending ? 'Sending...' : 'Send'}
           className="self-start"
         >
-          {isSending ? (
-            <SpinnerIcon className="animate-spin" weight="bold" />
-          ) : (
-            <PaperPlaneRightIcon weight="bold" />
-          )}
+          {isSending ? <SpinnerIcon className="animate-spin" weight="bold" /> : <PaperPlaneRightIcon weight="bold" />}
         </Button>
       </form>
     </motion.div>

@@ -32,17 +32,17 @@ export function useInputControls({
 
   const microphoneToggle = useTrackToggle({
     source: Track.Source.Microphone,
-    onDeviceError: (error) => onDeviceError?.({ source: Track.Source.Microphone, error }),
+    onDeviceError: error => onDeviceError?.({ source: Track.Source.Microphone, error }),
   });
 
   const cameraToggle = useTrackToggle({
     source: Track.Source.Camera,
-    onDeviceError: (error) => onDeviceError?.({ source: Track.Source.Camera, error }),
+    onDeviceError: error => onDeviceError?.({ source: Track.Source.Camera, error }),
   });
 
   const screenShareToggle = useTrackToggle({
     source: Track.Source.ScreenShare,
-    onDeviceError: (error) => onDeviceError?.({ source: Track.Source.ScreenShare, error }),
+    onDeviceError: error => onDeviceError?.({ source: Track.Source.ScreenShare, error }),
   });
 
   const micTrackRef = useMemo(() => {
@@ -53,12 +53,8 @@ export function useInputControls({
     };
   }, [localParticipant, microphoneTrack]);
 
-  const {
-    saveAudioInputEnabled,
-    saveVideoInputEnabled,
-    saveAudioInputDeviceId,
-    saveVideoInputDeviceId,
-  } = usePersistentUserChoices({ preventSave: !saveUserChoices });
+  const { saveAudioInputEnabled, saveVideoInputEnabled, saveAudioInputDeviceId, saveVideoInputDeviceId } =
+    usePersistentUserChoices({ preventSave: !saveUserChoices });
 
   const handleAudioDeviceChange = useCallback(
     (deviceId: string) => {

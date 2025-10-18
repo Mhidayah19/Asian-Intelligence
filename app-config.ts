@@ -20,22 +20,23 @@ export interface AppConfig {
 }
 
 export const APP_CONFIG_DEFAULTS: AppConfig = {
-  companyName: 'LiveKit',
-  pageTitle: 'LiveKit Voice Agent',
-  pageDescription: 'A voice agent built with LiveKit',
+  companyName: 'Asian Intelligence',
+  pageTitle: 'Asian Parent Math Tutor AI',
+  pageDescription:
+    'An AI tutor that helps with math in the style of an Asian tiger parent - "Why you get B+? You want to be failure in life ah?"',
 
   supportsChatInput: true,
   supportsVideoInput: true,
   supportsScreenShare: true,
   isPreConnectBufferEnabled: true,
 
-  logo: '/lk-logo.svg',
-  accent: '#002cf2',
-  logoDark: '/lk-logo-dark.svg',
-  accentDark: '#1fd5f9',
-  startButtonText: 'Start call',
+  logo: '/lk-logo.svg', // TODO: Replace with Asian parent avatar icon
+  accent: '#dc2626', // Red theme for Asian parent intensity
+  logoDark: '/lk-logo-dark.svg', // TODO: Replace with dark version
+  accentDark: '#f87171', // Lighter red for dark mode
+  startButtonText: 'Start Math Tutoring Session',
 
   // for LiveKit Cloud Sandbox
   sandboxId: undefined,
-  agentName: undefined,
+  agentName: undefined, // Set to undefined to allow any agent to join
 };

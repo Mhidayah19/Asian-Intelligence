@@ -1,0 +1,5 @@
+# LiveKit Agent Dependencies
+livekit-agents[silero,turn-detector]~=1.2.15
+livekit-plugins-openai~=1.2.15
+livekit-plugins-noise-cancellation~=0.2
+python-dotenv>=1.0.0
