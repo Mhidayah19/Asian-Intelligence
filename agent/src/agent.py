@@ -1,4 +1,6 @@
 import logging
+from dataclasses import dataclass
+from typing import Any
 
 from dotenv import load_dotenv
 from livekit.agents import (
@@ -9,9 +11,36 @@ from livekit.agents import (
     WorkerOptions,
     cli,
 )
+
+# Compatibility shim for older livekit-agents versions that lack newer LLM helpers.
+try:
+    from livekit.agents import llm as _lk_llm
+
+    if not hasattr(_lk_llm, "LLMCapabilities"):
+        @dataclass
+        class _LLMCapabilities:  # minimal stub used by latest openai plugin
+            supports_choices_on_int: bool = False
+            requires_persistent_functions: bool = False
+
+        _lk_llm.LLMCapabilities = _LLMCapabilities
+
+    if not hasattr(_lk_llm, "ToolChoice"):
+        _lk_llm.ToolChoice = Any  # type: ignore[attr-defined]
+
+    if not hasattr(_lk_llm.ChatContext, "_metadata"):
+        def _compat_metadata(self) -> dict[str, Any]:
+            if not hasattr(self, "__compat_metadata"):
+                self.__compat_metadata = {}
+            return self.__compat_metadata
+
+        _lk_llm.ChatContext._metadata = property(_compat_metadata)  # type: ignore[attr-defined]
+except Exception:
+    pass
+
 from livekit.plugins import openai, silero
 
 logger = logging.getLogger("agent")
+logger.setLevel(logging.DEBUG)
 
 load_dotenv(".env.local")
 
@@ -31,19 +60,30 @@ def prewarm(proc: JobProcess):
 
 
 async def entrypoint(ctx: JobContext):
+    logger.info(f"🎯 Entrypoint called for room: {ctx.room.name}")
     ctx.log_context_fields = {"room": ctx.room.name}
 
-    # Initialize OpenAI Realtime model (handles STT, LLM, and TTS)
-    session = AgentSession(
-        llm=openai.realtime.RealtimeModel(
-            voice="alloy",  # Available: alloy, echo, fable, onyx, nova, shimmer
-            temperature=0.8,
+    try:
+        logger.info("🤖 Creating OpenAI Realtime model...")
+        # Initialize OpenAI Realtime model (handles STT, LLM, and TTS)
+        session = AgentSession(
+            llm=openai.realtime.RealtimeModel(
+                voice="alloy",  # Available: alloy, echo, fable, onyx, nova, shimmer
+                temperature=0.8,
+            )
         )
-    )
 
-    # Start the session and connect to the room
-    await session.start(agent=Assistant(), room=ctx.room)
-    await ctx.connect()
+        logger.info("🚀 Starting agent session...")
+        # Start the session and connect to the room
+        await session.start(agent=Assistant(), room=ctx.room)
+        
+        logger.info("🔌 Connecting to room...")
+        await ctx.connect()
+        
+        logger.info(f"✅ Agent successfully connected to room: {ctx.room.name}")
+    except Exception as e:
+        logger.error(f"❌ Error in entrypoint: {e}", exc_info=True)
+        raise
 
 
 if __name__ == "__main__":
