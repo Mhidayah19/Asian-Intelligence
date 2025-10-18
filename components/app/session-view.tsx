@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import type { AppConfig } from '@/app-config';
+import { AgentAvatarCard } from '@/components/app/agent-avatar-card';
 import { ChatTranscript } from '@/components/app/chat-transcript';
 import { PreConnectMessage } from '@/components/app/preconnect-message';
 import { TileLayout } from '@/components/app/tile-layout';
@@ -81,7 +82,7 @@ export const SessionView = ({
   };
 
   return (
-    <section className="bg-background relative z-10 h-full w-full overflow-hidden" {...props}>
+    <section className="bg-gradient-to-br from-red-50 to-amber-50 dark:from-red-950/20 dark:to-amber-950/20 relative z-10 h-full w-full overflow-hidden" {...props}>
       {/* Chat Transcript */}
       <div
         className={cn(
@@ -102,6 +103,13 @@ export const SessionView = ({
       {/* Tile Layout */}
       <TileLayout chatOpen={chatOpen} />
 
+      {/* Side Panel - Avatar & Audio (visible when chat is closed) */}
+      {!chatOpen && (
+        <div className="fixed right-8 top-8 bottom-40 z-40 w-[340px] hidden lg:flex flex-col">
+          <AgentAvatarCard mood="neutral" className="flex-shrink-0" />
+        </div>
+      )}
+
       {/* Bottom */}
       <MotionBottom
         {...BOTTOM_VIEW_MOTION_PROPS}
@@ -110,7 +118,7 @@ export const SessionView = ({
         {appConfig.isPreConnectBufferEnabled && (
           <PreConnectMessage messages={messages} className="pb-4" />
         )}
-        <div className="bg-background relative mx-auto max-w-2xl pb-3 md:pb-12">
+        <div className="bg-background/80 backdrop-blur-sm relative mx-auto max-w-2xl pb-3 md:pb-12 rounded-lg">
           <Fade bottom className="absolute inset-x-0 top-0 h-4 -translate-y-full" />
           <AgentControlBar controls={controls} onChatOpenChange={setChatOpen} />
         </div>

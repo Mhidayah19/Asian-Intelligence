@@ -11,13 +11,13 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(0.577 0.245 27.325); /* Red for Asian parent intensity */
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
+  --accent: oklch(0.828 0.189 84.429); /* Amber accent */
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
@@ -36,6 +36,10 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  
+  /* Asian Parent Theme Custom Variables */
+  --asian-parent-red: #dc2626;
+  --asian-parent-amber: #f59e0b;
 }
 
 .dark {
@@ -45,13 +49,13 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.269 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: oklch(0.704 0.191 22.216); /* Lighter red for dark mode */
+  --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.371 0 0);
+  --accent: oklch(0.769 0.188 70.08); /* Amber accent for dark mode */
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
@@ -70,6 +74,10 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.439 0 0);
+  
+  /* Asian Parent Theme Custom Variables - Dark Mode */
+  --asian-parent-red: #f87171;
+  --asian-parent-amber: #fbbf24;
 }
 
 @theme inline {
@@ -157,5 +165,22 @@
     100% {
       background-position: 250% 0;
     }
+  }
+
+  /* Asian Parent Theme Utilities */
+  .report-card-gradient {
+    background: linear-gradient(135deg, #fef3c7 0%, #fee2e2 100%);
+  }
+
+  .dark .report-card-gradient {
+    background: linear-gradient(135deg, #451a03 0%, #450a0a 100%);
+  }
+
+  .asian-parent-text {
+    @apply text-red-800 dark:text-red-400 font-semibold;
+  }
+
+  .cousin-comparison {
+    @apply text-amber-600 dark:text-amber-400 font-bold;
   }
 }

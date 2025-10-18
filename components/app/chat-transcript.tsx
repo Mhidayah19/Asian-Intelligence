@@ -3,6 +3,7 @@
 import { AnimatePresence, type HTMLMotionProps, motion } from 'motion/react';
 import { type ReceivedChatMessage } from '@livekit/components-react';
 import { ChatEntry } from '@/components/livekit/chat-entry';
+import { cn } from '@/lib/utils';
 
 const MotionContainer = motion.create('div');
 const MotionChatEntry = motion.create(ChatEntry);
@@ -66,17 +67,29 @@ export function ChatTranscript({
             const locale = navigator?.language ?? 'en-US';
             const messageOrigin = from?.isLocal ? 'local' : 'remote';
             const hasBeenEdited = !!editTimestamp;
+            const isAsianParent = !from?.isLocal; // Agent messages are from Asian parent
 
             return (
-              <MotionChatEntry
-                key={id}
-                locale={locale}
-                timestamp={timestamp}
-                message={message}
-                messageOrigin={messageOrigin}
-                hasBeenEdited={hasBeenEdited}
-                {...MESSAGE_MOTION_PROPS}
-              />
+              <div key={id} className={cn(isAsianParent && 'asian-parent-message')}>
+                <MotionChatEntry
+                  locale={locale}
+                  timestamp={timestamp}
+                  message={message}
+                  messageOrigin={messageOrigin}
+                  hasBeenEdited={hasBeenEdited}
+                  {...MESSAGE_MOTION_PROPS}
+                />
+                {/* Add emoji reactions for Asian parent messages */}
+                {isAsianParent && message.toLowerCase().includes('aiya') && (
+                  <span className="ml-2 text-xl">😤</span>
+                )}
+                {isAsianParent && message.toLowerCase().includes('walao') && (
+                  <span className="ml-2 text-xl">😠</span>
+                )}
+                {isAsianParent && (message.toLowerCase().includes('good') || message.toLowerCase().includes('not bad')) && (
+                  <span className="ml-2 text-xl">😐</span>
+                )}
+              </div>
             );
           })}
         </MotionContainer>
